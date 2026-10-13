@@ -27,7 +27,7 @@ while True:
 	for i in range(0, 11):
 		while clk()==1:
 			continue
-		c=c<<1+dta()
+		c=(c<<1)+dta()
 		while clk()==0:
 			continue
 	c>>=2

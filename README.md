@@ -19,7 +19,7 @@ included.
 
 ## Running and stopping
 
-There is no installer, dependency lockfile or automated test suite. On a
+There is no installer or dependency lockfile. On a
 compatible, already configured Raspberry Pi setup, the historical entry points
 are `python2 pui.py` and `python2 iui.py`. Access to GPIO is needed by both, and
 `pui.py` additionally needs permission to create a Linux `uinput` device. Neither
@@ -32,3 +32,16 @@ timeout; a disconnected or stalled keyboard can keep it spinning. It emits
 clicks rather than tracking a full key-down/key-up state, and the diagnostic
 version is narrower still. Treat the code as a starting point for hardware
 experiments, not a finished input service.
+
+## Offline decoder check
+
+```sh
+python3 tests/decoder_test.py
+```
+
+This runs the polling loop's actual frame-assembly code with simulated clock
+transitions and all 256 data-byte frames. It covers the corrected shift/add
+precedence and the lookup table's reversed-bit convention. It does not import
+GPIO, inject system key events, validate electrical timing or establish Python 2
+runtime compatibility. Parity/framing validation and hardware operation remain
+outside this check.
